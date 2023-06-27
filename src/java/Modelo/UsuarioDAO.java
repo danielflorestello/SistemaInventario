@@ -16,14 +16,11 @@ public class UsuarioDAO {
     public Usuarios validar(String Usuario, String Clave) {
         Usuarios u = new Usuarios();
         
-        String sql = "select U.idUsuario, U.Nombre, U.Apellido, U.Dni, U.Usuario, U.Clave, U.idRol, R.NombreRol"
-                + " from usuarios U"
-                + " inner join rol R on R.idRol = U.idRol"
-                + " where U.Usuario=? and U.Clave=?";
+        String sql = "CALL validarUsuario(?, ?)";
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             ps.setString(1, Usuario);
             ps.setString(2, Clave);
             rs = ps.executeQuery();

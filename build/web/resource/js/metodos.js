@@ -4,7 +4,7 @@ const Fecha = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2,
 
 $(document).ready(function () {
 
-//Compra
+    //Compra
     $("#agregarCompra").click(function () {
         var idTipo = 1;
         var cliente = document.getElementById('cliente').value;
@@ -32,6 +32,31 @@ $(document).ready(function () {
                     'idUsuario': idUsuario,
                     'idTipo': idTipo
                 },
+            });
+        }
+    });
+    
+    $("#añadirCliente").click(function () {
+        var cliente = document.getElementById('cliente').value;
+        var Participante = document.getElementById('cliente').value;
+        
+        if (!cliente) {
+            Swal.fire({
+                title: '¡Llene el campo, por favor!',
+                allowOutsideClick: false
+            });
+
+        } else {
+
+            $.ajax({
+                type: 'POST',
+                url: 'compraControlador?accion=formularioCompra',
+                data: {
+                    'cliente': cliente
+                },
+                success: function () {
+                    Participante.value = cliente;
+                }
             });
         }
     });

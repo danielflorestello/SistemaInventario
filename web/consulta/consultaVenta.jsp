@@ -48,7 +48,7 @@
             <div class="row">
                 
                 <!Formulario para el registro de ventas-------->
-                <div class="col d-flex">
+                <div class="col">
                     <div class="card border-dark">
                         <div class="card-header text-center">
                             <label class="col col-form-label fw-bold"> REGISTRO DE VENTA </label>
@@ -139,15 +139,13 @@
                                                 <td>S/${lista.getMonto()}</td>
                                                 <td>${lista.getFecha()}</td>
 
-                                                <td>                                 
+                                                <td class="d-grid gap-2">                                 
                                                     <a id="btnEditar" class="btn btn-outline-warning">
-                                                        <input type="hidden" name="lista" id="lista" value="${lista}">
-                                                        <span class="bi bi-pencil-square">Editar</span>
+                                                        <input type="hidden" name="lista" id="lista" value="${lista}">Editar
                                                     </a>
 
                                                     <a id="btnEliminar" class="btn btn-outline-danger">
-                                                        <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">
-                                                        <span class="bi bi-trash">Eliminar</span>
+                                                        <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">Eliminar
                                                     </a>
                                                 </td>
                                             </tr>
@@ -161,6 +159,6 @@
             </div>
         </div>
                                             
-        <jsp:include page="../includes/footer.jsp"></jsp:include>
+        <script src="<%=request.getContextPath()%>/resource/js/funciones.js"></script>
     </body>
 </html>

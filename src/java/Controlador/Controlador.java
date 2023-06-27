@@ -38,21 +38,13 @@ public class Controlador extends HttpServlet {
     Calculo c = new Calculo();
     CalculoDAO cdao = new CalculoDAO();
     
-    List<Operacion> listado = new ArrayList<>();
-    
-    int item, idOperacion, codMercaderia;
-                
-    String cliente;
-    
-    double total, precio, cantidad, subTotal;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session;
         String accion = request.getParameter("accion");
-        List compra, venta, mercaderia, operacion;
+        List compra, mercaderia, operacion;
         int idTipo;
                 
         switch(accion) {
@@ -97,7 +89,7 @@ public class Controlador extends HttpServlet {
                 break;
                 
             case "agregarVenta":
-                String Participante = request.getParameter("participante");
+                String Participante = request.getParameter("Participante");
                 int idMercaderia = Integer.parseInt(request.getParameter("idMercaderia"));
                 double Cantidad = Double.parseDouble(request.getParameter("Cantidad"));
                 double Precio = Double.parseDouble(request.getParameter("Precio"));
@@ -128,55 +120,6 @@ public class Controlador extends HttpServlet {
                 dvdao.eliminarDetalleVenta(idDetalleVenta);*/
                 break;
                 
-            //Compra de Mercadería----------------------------------------------------------------------
-            case "mostrarCompra":
-                idTipo = 1;
-                operacion = odao.listarOperacion(idTipo);
-                request.setAttribute("lista", operacion);
-                request.getRequestDispatcher("consulta/consultaCompra.jsp").forward(request, response);
-                break;
-                
-            case "formularioCompra":
-                mercaderia = mdao.listarMercaderia();
-                request.setAttribute("mercaderia", mercaderia);
-                request.getRequestDispatcher("agregar/agregarCompra.jsp").forward(request, response);
-                break;
-                
-            case "Agregar":
-                total = 0.00;
-                item = item+1;
-                cliente = request.getParameter("cliente");
-                codMercaderia = Integer.parseInt(request.getParameter("mercaderia"));
-                precio = Double.parseDouble(request.getParameter("precio"));
-                cantidad = Double.parseDouble(request.getParameter("cantidad"));
-                subTotal = precio * cantidad;
-                
-                Operacion op = new Operacion();
-                
-                op.setItem(item);
-                op.setIdOperacion(idOperacion);
-                op.setParticipante(cliente);
-                op.setIdMercaderia(codMercaderia);
-                
-                String nombreMercaderia = mdao.nombreMercaderia(codMercaderia);
-                
-                op.setNombreMercaderia(nombreMercaderia);
-                op.setPrecio(precio);
-                op.setCantidad(cantidad);
-                op.setSubTotal(subTotal);
-                
-                listado.add(op);
-                
-                for (int i = 0; i < listado.size(); i++) {
-                    total = total + listado.get(i).getSubTotal();
-                }
-                
-                request.setAttribute("total", total);
-                request.setAttribute("listado", listado);
-                request.getRequestDispatcher("Controlador?accion=formularioCompra").forward(request, response);
-                break;
-
-                
             //Ganancias
             case "mostrarGanancia":
                 double totalCosto = cdao.totalCosto();
@@ -188,14 +131,20 @@ public class Controlador extends HttpServlet {
                 double totalGanancia = cdao.totalGanancia();
                 c.setTotalGanancia(totalGanancia);
                 
+                mercaderia = mdao.listarMercaderia();
+                
+                request.setAttribute("listado", mercaderia);
                 request.setAttribute("calculo", c);
                 request.getRequestDispatcher("ganancia.jsp").forward(request, response);
                 break;
                 
-            default:
+            case "Salir":
                 session = request.getSession();
                 session.invalidate();
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                
+            default:
+                request.getRequestDispatcher("principal.jsp").forward(request, response);
         }
     }
 

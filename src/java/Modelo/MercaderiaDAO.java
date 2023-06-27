@@ -18,13 +18,13 @@ public class MercaderiaDAO {
     int r;
     
     public List listarMercaderia() {
-        String sql = "select * from mercaderia";
+        String sql = "CALL listarMercaderia()";
         
         List<Mercaderia> lista = new ArrayList<>();
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -42,11 +42,12 @@ public class MercaderiaDAO {
     
     public String nombreMercaderia(int idMercaderia) {
         String nombreMercaderia = "";
-        String sql = "select Nombre from mercaderia where idMercaderia="+idMercaderia;
+        String sql = "CALL nombreMercaderia(?)";
         
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
+            ps.setInt(1, idMercaderia);
             rs = ps.executeQuery();
             
             while (rs.next()) {                

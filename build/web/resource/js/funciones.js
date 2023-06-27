@@ -33,12 +33,20 @@ $(document).ready(function () {
         var Precio = document.getElementById('Precio').value;
         var Monto = document.getElementById('Monto').value;
 
-        if (!Comprador || !Cantidad || !Precio || !Fecha) {
+        if (!Comprador || !Cantidad || !Precio) {
             Swal.fire({
                 title: '¡Llene los todos los campos!',
                 allowOutsideClick: false
             });
-
+            
+        } else if (!idUsuario) {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Oops...!',
+                text: 'Acaba de ocurrir un error relacionado con su sesión, vuelva a ingresar para solucionarlo',
+                allowOutsideClick: false
+            });
+            
         } else {
             
             $.ajax({

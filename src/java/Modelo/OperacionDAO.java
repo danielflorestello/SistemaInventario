@@ -17,18 +17,14 @@ public class OperacionDAO {
     Operacion o;
     
     public List listarOperacion(int idTipo) {
-        String sql = "select O.idOperacion, O.Participante, O.Monto, O.Fecha, O.idUsuario, O.idTipo,"
-                + " U.Nombre, T.nombreTipo"
-                + " from operacion O"
-                + " inner join usuarios U on U.idUsuario = O.idUsuario"
-                + " inner join tipo_operacion T on T.idTipo = O.idTipo"
-                + " where O.idTipo=" +idTipo;
+        String sql = "CALL listarOperacion(?)";
         
         List<Operacion> lista = new ArrayList<>();
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
+            ps.setInt(1, idTipo);
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -53,11 +49,11 @@ public class OperacionDAO {
     
     public String idOperacion() {
         String idOperacion = "";
-        String sql = "select max(idOperacion) from operacion";
+        String sql = "CALL idOperacion()";
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             rs = ps.executeQuery();
             
             while (rs.next()) {                
@@ -71,11 +67,11 @@ public class OperacionDAO {
     }
     
     public int agregarOperacion(Operacion op) {
-        String sql = "insert into operacion(Participante, Monto, Fecha, idUsuario, idTipo) values (?,?,?,?,?)";
+        String sql = "CALL agregarOperacion(?, ?, ?, ?, ?)";
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             ps.setString(1, op.getParticipante());
             ps.setDouble(2, op.getMonto());
             ps.setString(3, op.getFecha());

@@ -10,7 +10,7 @@ public class Conexion {
     public Connection Conexion(){
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_inventario","root","");
             System.out.println("Conexion exitosa");
             

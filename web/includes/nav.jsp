@@ -11,25 +11,29 @@
         
         <div class="navbar-collapse justify-content-end collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                
-                <!-- CONSULTAr COMPRA -->
+                <!-- PÁGINA PRINCIPAL -->
                 <li class="nav-item">
-                    <a href="Controlador?accion=mostrarCompra" class="navbar-brand">Compra</a>
+                    <a href="Controlador?accion=home" class="navbar-brand">Inicio</a>
                 </li>
                 
-                <!-- CONSULTAr VENTA -->
+                <!-- CONSULTAR COMPRA -->
+                <li class="nav-item">
+                    <a href="compraControlador?accion=mostrarCompra" class="navbar-brand">Compra</a>
+                </li>
+                
+                <!-- CONSULTAR VENTA -->
                 <li class="nav-item">
                     <a href="Controlador?accion=mostrarVenta" class="navbar-brand">Venta</a>
                 </li>
                 
-                <!-- CONSULTAR GANANCCIA MENSAUALES -->
+                <!-- CONSULTAR GANANCIAS MENSUALES -->
                 <li class="nav-item">
                     <a href="Controlador?accion=mostrarGanancia" class="navbar-brand"> Dashboard </a>
                 </li>
                 
                 <!-- CERRAR SESIÓN -->
                 <li class="nav-item">
-                    <a class="navbar-brand" href="Controlador?accion=logout"> Cerrar Sesión 
+                    <a class="navbar-brand" href="Controlador?accion=Salir"> Cerrar Sesión 
                         <i class="bi bi-box-arrow-right"></i>
                     </a>
                 </li>

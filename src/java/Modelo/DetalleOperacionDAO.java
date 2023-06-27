@@ -17,19 +17,14 @@ public class DetalleOperacionDAO {
     DetalleOperacion de;
     
     public List listarDetalle(int idTipo) {
-        String sql = "select D.idDetalle, D.Cantidad, D.Precio, D.idOperacion, D.idMercaderia,"
-                + " O.Participante, O.Monto, O.Fecha, O.idTipo,"
-                + " M.Nombre"
-                + " from detalle_operacion D"
-                + " inner join mercaderia M on M.idMercaderia = D.idMercaderia"
-                + " inner join operacion O on O.idOperacion = D.idOperacion"
-                + " where O.idTipo=" +idTipo;
+        String sql = "CALL listarDetalle(?)";
         
         List<DetalleOperacion> lista = new ArrayList<>();
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
+            ps.setInt(1, idTipo);
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -55,11 +50,11 @@ public class DetalleOperacionDAO {
     }
     
     public int agregarDetalleOperacion(DetalleOperacion de) {
-        String sql = "insert into detalle_operacion(Cantidad, Precio, idOperacion, idMercaderia) values (?,?,?,?)";
+        String sql = "CALL agregarDetalleOperacion(?, ?, ?, ?)";
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             ps.setDouble(1, de.getCantidad());
             ps.setDouble(2, de.getPrecio());
             ps.setInt(3, de.getIdOperacion());

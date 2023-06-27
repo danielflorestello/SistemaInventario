@@ -23,7 +23,7 @@ public class CalculoDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while (rs.next()) {     
+            while (rs.next()) {
                 totalCosto = rs.getDouble(1);
             }
             

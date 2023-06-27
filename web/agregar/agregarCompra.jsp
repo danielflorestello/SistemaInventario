@@ -6,41 +6,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="../includes/header.jsp"></jsp:include>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script src="<%=request.getContextPath()%>/resource/js/cambiarPestanna.js"></script>
     </head>
     
-    <body onload="javascript:cambiarPestanna(pestanas,pestana1);">
+    <body>
         <jsp:include page="../includes/nav.jsp"></jsp:include>
         <h1>REGISTRAR MERCADERÍA</h1>
         
-        
-        <div class="container border-dark">            
-            <div id="pestanas">
-                <ul class="nav nav-tabs" id="lista">
-                    <li class="nav-item" role="presentation" id="pestana1"><a class="nav-link active" href='javascript:cambiarPestanna(pestanas,pestana1);'>1</a></li>
-                    <li class="nav-item" role="presentation" id="pestana2"><a class="nav-link" href='javascript:cambiarPestanna(pestanas,pestana2);'>2</a></li>
-                    <li class="nav-item" role="presentation" id="pestana3"><a class="nav-link" href='javascript:cambiarPestanna(pestanas,pestana3);'>3</a></li>
-                    <li class="nav-item" role="presentation" id="agregarTab"><a class="nav-link"><i class="bi bi-plus-circle"></i></a></li>
-                </ul>
-                
-                
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-                </div>
-            </div>
-            
-            <div id="contenidopestanas">
-                <div id="cpestana1"></div>
-                
-                <div id="cpestana2"></div>
-                
-                <div id="cpestana3"></div>
-            </div>
-        </div>
-        
-        <form action="Controlador?accion=Agregar" method="POST">
         <div class="container py-5">
             <div class="row">
                 
@@ -53,25 +24,23 @@
                         
                         <div class="card-body">
                             <input type="hidden" id="Usuario" name="Usuario" value="${usuario.getIdUsuario()}">
-                            
-                            <div class="form-group d-flex" py-3>
-                                <label class="col-sm-4 col-form-label">Cliente: </label>
 
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Cliente...">
-                                </div>
+                            <div class="d-inline-flex p-2">
+                                <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Cliente...">
+                            </div>
+
+                            <div class="d-inline-flex p-2">
+                                <a id="añadirCliente" class="btn btn-outline-info">Añadir</a>
                             </div>
 
                             <div class="form-group d-flex py-3">
                                 <label class="col-sm-4 col-form-label">Mercadería: </label>
 
                                 <div class="col-sm-7">
-                                    <select name="mercaderia" id="mercaderia" class="form-control">
-                                    
-                                    <c:forEach var="datos" items="${mercaderia}">
-                                        <option value="${datos.getIdMercaderia()}">  ${datos.getNombre()} </option>
-                                    </c:forEach>
-                                        
+                                    <select name="mercaderia" id="mercaderia" class="form-control">                
+                                        <c:forEach var="datos" items="${mercaderia}">
+                                            <option value="${datos.getIdMercaderia()}">  ${datos.getNombre()} </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -101,14 +70,22 @@
                 </div>
                 
                 <!Tabla de ventas-------->
-                <diV class="col-sm-8">
+                <div class="col-sm-8">
                     <div class="container">
-                        <div class="card border-dark">                
+                        <div class="card border-dark">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="d-flex col-sm-5 ml-auto">
+                                        <label class="fw-bold col-sm-3 col-form-label">Cliente: </label>
+                                        <input type="text" name="participante" id="participante" class="form-control" value="" readonly="">
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="card-body">
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th>Cliente</th>
                                             <th>Mercadería</th>
                                             <th>Precio Unitario</th>
                                             <th>Peso</th>
@@ -119,7 +96,6 @@
                                     <tbody>
                                         <c:forEach var="lista" items="${listado}">
                                             <tr>
-                                                <td>${lista.getParticipante()}</td>
                                                 <td>${lista.getNombreMercaderia()}</td>
                                                 <td>S/${lista.getPrecio()}</td>
                                                 <td>${lista.getCantidad()}</td>
@@ -159,8 +135,6 @@
                 </div>
             </div>
         </div>
-        </form>                           
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<%=request.getContextPath()%>/resource/js/metodos.js"></script>
     </body>
 </html>

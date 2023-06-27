@@ -173,7 +173,7 @@
                         <tbody>
                             <c:forEach var="lista" items="${listado}">
                                 <tr>
-                                    <td>${lista.getNombreMercaderia()}</td>
+                                    <td>${lista.getNombre()}</td>
                                     <td></td>
                                 </tr>
                             </c:forEach>

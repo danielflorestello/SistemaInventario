@@ -17,7 +17,7 @@
             
             <div class="col">
                 <div class="container mt-3" align="right">
-                    <a href="Controlador?accion=formularioCompra" class="btn btn-outline-success">
+                    <a href="compraControlador?accion=formularioCompra" class="btn btn-outline-success">
                         <span >Agregar</span>
                     </a>
                 </div>
@@ -85,7 +85,5 @@
                 </div>
             </div>
         </div>
-        
-        <jsp:include page="../includes/footer.jsp"></jsp:include>
     </body>
 </html>
