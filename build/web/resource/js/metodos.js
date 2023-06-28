@@ -38,7 +38,6 @@ $(document).ready(function () {
     
     $("#añadirCliente").click(function () {
         var cliente = document.getElementById('cliente').value;
-        var Participante = document.getElementById('cliente').value;
         
         if (!cliente) {
             Swal.fire({
@@ -47,17 +46,9 @@ $(document).ready(function () {
             });
 
         } else {
-
-            $.ajax({
-                type: 'POST',
-                url: 'compraControlador?accion=formularioCompra',
-                data: {
-                    'cliente': cliente
-                },
-                success: function () {
-                    Participante.value = cliente;
-                }
-            });
+            document.form.action="compraControlador?accion=agregarCliente";
+            document.form.method="POST";
+            document.form.submit();
         }
     });
 });

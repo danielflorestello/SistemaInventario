@@ -24,32 +24,6 @@
             </div>
         </div><hr>
         
-        <div class="container">
-            <div class="card border-primary h-100 py-2">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1"> Cliente:
-                                <input type="text" class="form-control-sm" placeholder="....">
-                            </div>
-                        </div>
-                        
-                        <div class="col">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1"> Mercadería:
-                                <input type="text" class="form-control-sm" placeholder="....">
-                            </div>                          
-                        </div>
-                        
-                        <div class="col">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1"> Fecha:
-                                <input type="text" class="form-control-sm"  placeholder="....">
-                            </div>                          
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <div class="container mt-4">
             <div class="card border-dark">                
                 <div class="card-body">

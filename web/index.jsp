@@ -17,12 +17,16 @@
                             <div class="row g-0">
                                 <div class="card-body p-4 p-lg-5 text-black" >
                                     <form name="form">
+                                        <div class="form-outline mb-4 text-center">
+                                            <img src="resource/imagenes/LOGO TEREY.jpeg" width="100px">
+                                        </div>
+                                        
                                         <div class="text-center pt-1 mb-4">
                                             <span class="h1 fw-bold mb-0">Inicio de Sesión</span>
                                         </div>
-
+                                        
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingrese a su cuenta</h5>
-
+                                        
                                         <div class="form-outline mb-4">
                                             <input type="text" id="usuario" name="usuario" class="form-control form-control-lg" placeholder="Usuario" />
                                         </div>

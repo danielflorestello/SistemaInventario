@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="">
-            <img src="<%=request.getContextPath()%>/resource/imagenes/Logo Empresa.png" style="height: 50px"> NEGOCIACIONES TEREY
+            <img src="<%=request.getContextPath()%>/resource/imagenes/LOGO TEREY.jpeg" style="height: 50px"> NEGOCIACIONES TEREY
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

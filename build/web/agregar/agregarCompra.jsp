@@ -11,7 +11,7 @@
     <body>
         <jsp:include page="../includes/nav.jsp"></jsp:include>
         <h1>REGISTRAR MERCADERÍA</h1>
-        
+        <form name="form">
         <div class="container py-5">
             <div class="row">
                 
@@ -77,7 +77,7 @@
                                 <div class="row">
                                     <div class="d-flex col-sm-5 ml-auto">
                                         <label class="fw-bold col-sm-3 col-form-label">Cliente: </label>
-                                        <input type="text" name="participante" id="participante" class="form-control" value="" readonly="">
+                                        <input type="text" name="participante" id="participante" class="form-control" value="${cliente}" readonly="">
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +135,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <script src="<%=request.getContextPath()%>/resource/js/metodos.js"></script>
     </body>
 </html>

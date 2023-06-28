@@ -69,6 +69,13 @@ public class compraControlador extends HttpServlet {
                 request.getRequestDispatcher("agregar/agregarCompra.jsp").forward(request, response);
                 break;
                 
+            case "agregarCliente":
+                cliente = request.getParameter("cliente");
+                o.setParticipante(cliente);
+                request.setAttribute("cliente", cliente);
+                request.getRequestDispatcher("compraControlador?accion=formularioCompra").forward(request, response);
+                break;
+                
             case "Agregar":
                 total = 0.00;
                 item = item+1;
@@ -77,28 +84,32 @@ public class compraControlador extends HttpServlet {
                 cantidad = Double.parseDouble(request.getParameter("cantidad"));
                 subTotal = precio * cantidad;
                 
-                Operacion op = new Operacion();
+                o = new Operacion();
                 
-                op.setItem(item);
-                op.setIdOperacion(idOperacion);
-                op.setIdMercaderia(codMercaderia);
+                o.setItem(item);
+                o.setIdOperacion(idOperacion);
+                o.setIdMercaderia(codMercaderia);
                 
                 String nombreMercaderia = mdao.nombreMercaderia(codMercaderia);
                 
-                op.setNombreMercaderia(nombreMercaderia);
-                op.setPrecio(precio);
-                op.setCantidad(cantidad);
-                op.setSubTotal(subTotal);
+                o.setNombreMercaderia(nombreMercaderia);
+                o.setPrecio(precio);
+                o.setCantidad(cantidad);
+                o.setSubTotal(subTotal);
                 
-                listado.add(op);
+                listado.add(o);
                 
                 for (int i = 0; i < listado.size(); i++) {
                     total = total + listado.get(i).getSubTotal();
                 }
-                
+                request.setAttribute("cliente", cliente);
                 request.setAttribute("total", total);
                 request.setAttribute("listado", listado);
+                request.getRequestDispatcher("compraControlador?accion=formularioCompra").forward(request, response);
                 break;
+                
+            default:
+                request.getRequestDispatcher("principal.jsp").forward(request, response);
         }
     }
     
