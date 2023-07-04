@@ -28,7 +28,7 @@
                 
                 <!-- CONSULTAR GANANCIAS MENSUALES -->
                 <li class="nav-item">
-                    <a href="Controlador?accion=mostrarGanancia" class="navbar-brand"> Dashboard </a>
+                    <a href="Controlador?accion=mostrarDashboard" class="navbar-brand"> Dashboard </a>
                 </li>
                 
                 <!-- CERRAR SESIÓN -->

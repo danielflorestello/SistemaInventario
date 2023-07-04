@@ -12,7 +12,6 @@ import Modelo.OperacionDAO;
 import Modelo.UsuarioDAO;
 import Modelo.Usuarios;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -121,7 +120,7 @@ public class Controlador extends HttpServlet {
                 break;
                 
             //Ganancias
-            case "mostrarGanancia":
+            case "mostrarDashboard":
                 double totalCosto = cdao.totalCosto();
                 c.setTotalCosto(totalCosto);
                 
@@ -135,7 +134,7 @@ public class Controlador extends HttpServlet {
                 
                 request.setAttribute("listado", mercaderia);
                 request.setAttribute("calculo", c);
-                request.getRequestDispatcher("ganancia.jsp").forward(request, response);
+                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
                 break;
                 
             case "Salir":

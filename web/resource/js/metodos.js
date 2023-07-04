@@ -4,38 +4,7 @@ const Fecha = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2,
 
 $(document).ready(function () {
 
-    //Compra
-    $("#agregarCompra").click(function () {
-        var idTipo = 1;
-        var cliente = document.getElementById('cliente').value;
-        var idUsuario = document.getElementById('Usuario').value;
-        var mercaderia = document.getElementById('mercaderia').value;
-        var cantidad = document.getElementById('cantidad').value;
-        var precio = document.getElementById('precio').value;
-
-        if (!cliente || !cantidad || !precio) {
-            Swal.fire({
-                title: '¡Llene los todos los campos!',
-                allowOutsideClick: false
-            });
-
-        } else {
-
-            $.ajax({
-                type: 'POST',
-                url: 'Controlador?accion=Agregar',
-                data: {
-                    'participante': cliente,
-                    'mercaderia': mercaderia,
-                    'cantidad': cantidad,
-                    'precio': precio,
-                    'idUsuario': idUsuario,
-                    'idTipo': idTipo
-                },
-            });
-        }
-    });
-    
+    //Añadir Cliente
     $("#añadirCliente").click(function () {
         var cliente = document.getElementById('cliente').value;
         
@@ -46,9 +15,53 @@ $(document).ready(function () {
             });
 
         } else {
-            document.form.action="compraControlador?accion=agregarCliente";
-            document.form.method="POST";
-            document.form.submit();
+            $.ajax({
+                type: 'POST',
+                url: 'compraControlador?accion=agregarCliente',
+                data: {
+                    'cliente': cliente
+                },
+                success: function () {
+                    parent.location.href = "compraControlador?accion=formularioCompra";
+                }
+            });
         }
+    });
+    
+    //Agregar Compra
+    $("#agregarCompra").click(function () {
+        var mercaderia = document.getElementById('mercaderia').value;
+        var precio = document.getElementById('precio').value;
+        var cantidad = document.getElementById('cantidad').value;
+        
+        if (!cantidad || !precio) {
+            Swal.fire({
+                title: '¡Llene los todos los campos!',
+                allowOutsideClick: false
+            });
+
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'compraControlador?accion=Agregar',
+                data: {
+                    'mercaderia': mercaderia,
+                    'precio': precio,
+                    'cantidad': cantidad
+                },
+                success: function () {
+                    parent.location.href = "compraControlador?accion=formularioCompra";
+                }
+            });
+        }
+    });
+    
+    //Insertar Compra
+    $("#insertarCompra").click(function () {
+        document.getElementById('mercaderia').value = Fecha;
+        
+        document.form.action="compraControlador?accion=insertarCompra";
+        document.form.method="POST";
+        document.form.submit();
     });
 });

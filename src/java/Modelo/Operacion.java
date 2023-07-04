@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.List;
+
 public class Operacion {
     private int idOperacion;
     private String Participante;
@@ -149,6 +151,10 @@ public class Operacion {
 
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public void setNombreMercaderia(List nombreMercaderia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

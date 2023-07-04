@@ -11,6 +11,7 @@
     <body>
         <jsp:include page="../includes/nav.jsp"></jsp:include>
         <h1>REGISTRAR MERCADERÍA</h1>
+        
         <form name="form">
         <div class="container py-5">
             <div class="row">
@@ -24,7 +25,6 @@
                         
                         <div class="card-body">
                             <input type="hidden" id="Usuario" name="Usuario" value="${usuario.getIdUsuario()}">
-
                             <div class="d-inline-flex p-2">
                                 <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Cliente...">
                             </div>
@@ -62,8 +62,8 @@
                             </div>
                             
                             <div class="card-footer text-center">
-                                <button type="submit" name="accion" value="Agregar" class="btn btn-success">Agregar</button>
-                                <a id="cancelarVenta" class="btn btn-secondary">Cancelar</a>
+                                <a id="agregarCompra" class="btn btn-success">Agregar</a>
+                                <a id="limpiarCampos" class="btn btn-secondary">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -101,12 +101,7 @@
                                                 <td>${lista.getCantidad()}</td>
                                                 <td>${lista.getSubTotal()}</td>
                                                 
-                                                <td>                                 
-                                                    <a id="btnEditar" class="btn btn-outline-warning">
-                                                        <input type="hidden" name="lista" id="lista" value="${lista}">
-                                                        <span class="bi bi-pencil-square">Editar</span>
-                                                    </a>
-
+                                                <td>
                                                     <a id="btnEliminar" class="btn btn-outline-danger">
                                                         <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">
                                                         <span class="bi bi-trash">Eliminar</span>
@@ -121,8 +116,8 @@
                             <div class="card-footer align-items-end">
                                 <div class="row">
                                     <div class="col">
-                                        <button value="Agregar" class="btn btn-success">Agregar</button>
-                                        <a id="cancelarVenta" class="btn btn-danger">Cancelar</a>
+                                        <a id="insertarCompra" class="btn btn-success">Agregar</a>
+                                        <a id="cancelarCompra" class="btn btn-danger">Cancelar</a>
                                     </div>
                                     
                                     <div class="col">

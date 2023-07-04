@@ -106,7 +106,7 @@
                                         <c:forEach var="lista" items="${lista}">
                                             <tr>
                                                 <td>${lista.getParticipante()}</td>
-                                                <td>${lista.getNombre()}</td>
+                                                <td>${lista.getIdOperacion()} - ${lista.getNombre()}</td>
                                                 <td>S/${lista.getPrecio()}</td>
                                                 <td>${lista.getCantidad()}</td>
                                                 <td>S/${lista.getMonto()}</td>

@@ -40,7 +40,7 @@ public class compraControlador extends HttpServlet {
     
     List<Operacion> listado = new ArrayList<>();
     
-    int item, idOperacion, codMercaderia;
+    int item, idOperacion, idMercaderia;
                 
     String cliente;
     
@@ -51,35 +51,28 @@ public class compraControlador extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String accion = request.getParameter("accion");
-        List compra, mercaderia, operacion;
-        int idTipo;
+        List operacion;
+        int idTipo = 1;
         
         switch(accion) {
             //Compra de Mercadería----------------------------------------------------------------------
             case "mostrarCompra":
-                idTipo = 1;
                 operacion = odao.listarOperacion(idTipo);
                 request.setAttribute("lista", operacion);
                 request.getRequestDispatcher("consulta/consultaCompra.jsp").forward(request, response);
                 break;
                 
-            case "formularioCompra":
-                mercaderia = mdao.listarMercaderia();
-                request.setAttribute("mercaderia", mercaderia);
-                request.getRequestDispatcher("agregar/agregarCompra.jsp").forward(request, response);
-                break;
-                
             case "agregarCliente":
                 cliente = request.getParameter("cliente");
                 o.setParticipante(cliente);
-                request.setAttribute("cliente", cliente);
-                request.getRequestDispatcher("compraControlador?accion=formularioCompra").forward(request, response);
                 break;
                 
             case "Agregar":
                 total = 0.00;
+                subTotal = 0.00;
+                
                 item = item+1;
-                codMercaderia = Integer.parseInt(request.getParameter("mercaderia"));
+                idMercaderia = Integer.parseInt(request.getParameter("mercaderia"));
                 precio = Double.parseDouble(request.getParameter("precio"));
                 cantidad = Double.parseDouble(request.getParameter("cantidad"));
                 subTotal = precio * cantidad;
@@ -88,9 +81,9 @@ public class compraControlador extends HttpServlet {
                 
                 o.setItem(item);
                 o.setIdOperacion(idOperacion);
-                o.setIdMercaderia(codMercaderia);
+                o.setIdMercaderia(idMercaderia);
                 
-                String nombreMercaderia = mdao.nombreMercaderia(codMercaderia);
+                String nombreMercaderia = mdao.nombreMercaderia(idMercaderia);
                 
                 o.setNombreMercaderia(nombreMercaderia);
                 o.setPrecio(precio);
@@ -102,10 +95,42 @@ public class compraControlador extends HttpServlet {
                 for (int i = 0; i < listado.size(); i++) {
                     total = total + listado.get(i).getSubTotal();
                 }
+                
+                break;
+                
+            case "formularioCompra":
+                List mercaderia = mdao.listarMercaderia();
+                
+                request.setAttribute("mercaderia", mercaderia);
                 request.setAttribute("cliente", cliente);
                 request.setAttribute("total", total);
                 request.setAttribute("listado", listado);
-                request.getRequestDispatcher("compraControlador?accion=formularioCompra").forward(request, response);
+                request.getRequestDispatcher("agregar/agregarCompra.jsp").forward(request, response);
+                break;
+            
+            case "insertarCompra":
+                String fecha = request.getParameter("Fecha");
+                int idUsuario = Integer.parseInt(request.getParameter("Usuario"));
+                
+                o.setParticipante(cliente);
+                o.setMonto(total);
+                o.setFecha(fecha);
+                o.setIdUsuario(idUsuario);
+                o.setIdTipo(idTipo);
+                odao.agregarOperacion(o);
+                
+                int id = Integer.parseInt(odao.idOperacion());
+                
+                for (int i = 0; i < listado.size(); i++) {
+                    de = new DetalleOperacion();
+                    de.setCantidad(listado.get(i).getCantidad());
+                    de.setPrecio(listado.get(i).getPrecio());
+                    de.setIdOperacion(id);
+                    de.setIdMercaderia(listado.get(i).getIdMercaderia());
+                    ddao.agregarDetalleOperacion(de);
+                }
+                
+                response.sendRedirect("compraControlador?accion=mostrarCompra");
                 break;
                 
             default:
