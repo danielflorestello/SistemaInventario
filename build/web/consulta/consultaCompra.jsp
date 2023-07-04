@@ -38,26 +38,26 @@
                         </thead>
                         
                         <tbody>
-                            <c:forEach var="lista" items="${lista}">
+                            
                                 <tr>
-                                    <td>${lista.getParticipante()}</td>
-                                    <td>S/${lista.getMonto()}</td>
-                                    <td>${lista.getFecha()}</td>
+                                    <td></td>
+                                    <td>S/</td>
+                                    <td></td>
+                                    
                                     <td>
-                                        <a href="" class="btn btn-outline-warning">
-                                            <span class="bi bi-pencil-square">Editar</span>
-                                        </a>
-                                            
-                                        <a href="" class="btn btn-outline-danger">
+                                        <input type="hidden" id="idOperacion" name="idOperacion" value="">
+                                        <a id="eliminarCompra" class="btn btn-outline-danger">
                                             <span class="bi bi-trash">Eliminar</span>
                                         </a>
                                     </td>
                                 </tr>
-                            </c:forEach>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </body>
+    
+    <script src="<%=request.getContextPath()%>/resource/js/compra.js"></script>
 </html>

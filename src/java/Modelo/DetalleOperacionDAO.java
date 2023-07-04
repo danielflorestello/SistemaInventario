@@ -32,13 +32,14 @@ public class DetalleOperacionDAO {
                 de.setIdDetalle(rs.getInt(1));
                 de.setCantidad(rs.getDouble(2));
                 de.setPrecio(rs.getDouble(3));
-                de.setIdOperacion(rs.getInt(4));
-                de.setIdMercaderia(rs.getInt(5));
-                de.setParticipante(rs.getString(6));
-                de.setMonto(rs.getDouble(7));
-                de.setFecha(rs.getString(8));
-                de.setIdTipo(rs.getInt(9));
-                de.setNombre(rs.getString(10));
+                de.setSubTotal(rs.getDouble(4));
+                de.setIdOperacion(rs.getInt(5));
+                de.setIdMercaderia(rs.getInt(6));
+                de.setParticipante(rs.getString(7));
+                de.setMonto(rs.getDouble(8));
+                de.setFecha(rs.getString(9));
+                de.setIdTipo(rs.getInt(10));
+                de.setNombre(rs.getString(11));
                 lista.add(de);
             }
             
@@ -50,15 +51,16 @@ public class DetalleOperacionDAO {
     }
     
     public int agregarDetalleOperacion(DetalleOperacion de) {
-        String sql = "CALL agregarDetalleOperacion(?, ?, ?, ?)";
+        String sql = "CALL agregarDetalleOperacion(?, ?, ?, ?, ?)";
         
         try {
             con = cn.Conexion();
             ps = con.prepareCall(sql);
             ps.setDouble(1, de.getCantidad());
             ps.setDouble(2, de.getPrecio());
-            ps.setInt(3, de.getIdOperacion());
-            ps.setInt(4, de.getIdMercaderia());
+            ps.setDouble(3, de.getSubTotal());
+            ps.setInt(4, de.getIdOperacion());
+            ps.setInt(5, de.getIdMercaderia());
             ps.executeUpdate();
             
         } catch (SQLException e) {
@@ -66,5 +68,19 @@ public class DetalleOperacionDAO {
         }
         
         return r;
+    }
+    
+    public void eliminarDetalle(int idOperacion) {
+        String sql = "CALL eliminarDetalle(?)";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, idOperacion);
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            
+        }
     }
 }

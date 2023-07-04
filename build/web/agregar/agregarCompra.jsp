@@ -25,6 +25,8 @@
                         
                         <div class="card-body">
                             <input type="hidden" id="Usuario" name="Usuario" value="${usuario.getIdUsuario()}">
+                            <input type="hidden" id="Fecha" name="Fecha" value="">
+                            
                             <div class="d-inline-flex p-2">
                                 <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Cliente...">
                             </div>
@@ -63,7 +65,6 @@
                             
                             <div class="card-footer text-center">
                                 <a id="agregarCompra" class="btn btn-success">Agregar</a>
-                                <a id="limpiarCampos" class="btn btn-secondary">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -102,8 +103,9 @@
                                                 <td>${lista.getSubTotal()}</td>
                                                 
                                                 <td>
-                                                    <a id="btnEliminar" class="btn btn-outline-danger">
-                                                        <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">
+                                                    <input type="hidden" name="idOperacion" id="idOperacion" value="${lista.getIdOperacion()}">
+                                                    
+                                                    <a id="btnEliminar" class="btn btn-outline-danger"> 
                                                         <span class="bi bi-trash">Eliminar</span>
                                                     </a>
                                                 </td>
@@ -131,6 +133,6 @@
             </div>
         </div>
         </form>
-        <script src="<%=request.getContextPath()%>/resource/js/metodos.js"></script>
+        <script src="<%=request.getContextPath()%>/resource/js/compra.js"></script>
     </body>
 </html>

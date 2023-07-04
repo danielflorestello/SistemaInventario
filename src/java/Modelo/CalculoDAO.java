@@ -14,13 +14,12 @@ public class CalculoDAO {
     
     public double totalCosto() {
         double totalCosto = 0;
-        int idTipo = 1;
         
-        String sql = "select sum(Monto) from operacion where idTipo="+idTipo;
+        String sql = "CALL totalCosto()";
         
         try {
             con = cn.Conexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -34,9 +33,8 @@ public class CalculoDAO {
     
     public double totalIngresos() {
         double totalIngresos = 0;
-        int idTipo = 2;
         
-        String sql = "select sum(Monto) from operacion where idTipo="+idTipo;
+        String sql = "CALL totalIngresos()";
         
         try {
             con = cn.Conexion();
@@ -53,7 +51,7 @@ public class CalculoDAO {
     }
     
     public double totalGanancia() {
-        double totalGanancia = 0;
+        double totalGanancia;
         
         totalGanancia = totalIngresos() - totalCosto();
         
@@ -61,6 +59,6 @@ public class CalculoDAO {
     }
     
     public double margenBruto() {
-      return 0;  
+        return 0;  
     }
 }

@@ -23,7 +23,7 @@
                 
                 <!-- CONSULTAR VENTA -->
                 <li class="nav-item">
-                    <a href="Controlador?accion=mostrarVenta" class="navbar-brand">Venta</a>
+                    <a href="ventaControlador?accion=mostrarVenta" class="navbar-brand">Venta</a>
                 </li>
                 
                 <!-- CONSULTAR GANANCIAS MENSUALES -->

@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Modelo.Calculo;
@@ -68,7 +67,6 @@ public class compraControlador extends HttpServlet {
                 break;
                 
             case "Agregar":
-                total = 0.00;
                 subTotal = 0.00;
                 
                 item = item+1;
@@ -91,18 +89,29 @@ public class compraControlador extends HttpServlet {
                 o.setSubTotal(subTotal);
                 
                 listado.add(o);
+                break;
+                
+           case "Delete":
+                int idOp = Integer.parseInt(request.getParameter("idOperacion"));
+                
+                for (int i = 0; i < listado.size(); i++) {
+                    if (listado.get(i).getIdOperacion() == idOp) {
+                        listado.remove(i);
+                    }
+                }
+                break;
+                
+            case "formularioCompra":
+                total = 0.00;
+                
+                List mercaderia = mdao.listarMercaderia();
+                request.setAttribute("mercaderia", mercaderia);
+                request.setAttribute("cliente", cliente);
                 
                 for (int i = 0; i < listado.size(); i++) {
                     total = total + listado.get(i).getSubTotal();
                 }
                 
-                break;
-                
-            case "formularioCompra":
-                List mercaderia = mdao.listarMercaderia();
-                
-                request.setAttribute("mercaderia", mercaderia);
-                request.setAttribute("cliente", cliente);
                 request.setAttribute("total", total);
                 request.setAttribute("listado", listado);
                 request.getRequestDispatcher("agregar/agregarCompra.jsp").forward(request, response);
@@ -123,14 +132,21 @@ public class compraControlador extends HttpServlet {
                 
                 for (int i = 0; i < listado.size(); i++) {
                     de = new DetalleOperacion();
-                    de.setCantidad(listado.get(i).getCantidad());
+                    de.setCantidad(listado.get(i).getCantidad());                    
                     de.setPrecio(listado.get(i).getPrecio());
+                    de.setSubTotal(listado.get(i).getSubTotal());
                     de.setIdOperacion(id);
                     de.setIdMercaderia(listado.get(i).getIdMercaderia());
                     ddao.agregarDetalleOperacion(de);
                 }
                 
                 response.sendRedirect("compraControlador?accion=mostrarCompra");
+                break;
+                
+            case "eliminarCompra":
+                idOperacion = Integer.parseInt(request.getParameter("idOperacion"));
+                odao.eliminarOperacion(idOperacion);
+                ddao.eliminarDetalle(idOperacion);
                 break;
                 
             default:

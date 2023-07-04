@@ -5,22 +5,26 @@ public class DetalleOperacion {
     private int idDetalle;
     private double Cantidad;
     private double Precio;
+    private double subTotal;
     private int idOperacion;
     private int idMercaderia;
+    
     private String Participante;
     private double Monto;
     private String Fecha;
     private int idTipo;
+    
     private String Nombre;
 
     public DetalleOperacion() {
         
     }
 
-    public DetalleOperacion(int idDetalle, double Cantidad, double Precio, int idOperacion, int idMercaderia, String Participante, double Monto, String Fecha, int idTipo, String Nombre) {
+    public DetalleOperacion(int idDetalle, double Cantidad, double Precio, double subTotal, int idOperacion, int idMercaderia, String Participante, double Monto, String Fecha, int idTipo, String Nombre) {
         this.idDetalle = idDetalle;
         this.Cantidad = Cantidad;
         this.Precio = Precio;
+        this.subTotal = subTotal;
         this.idOperacion = idOperacion;
         this.idMercaderia = idMercaderia;
         this.Participante = Participante;
@@ -52,6 +56,14 @@ public class DetalleOperacion {
 
     public void setPrecio(double Precio) {
         this.Precio = Precio;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
     }
 
     public int getIdOperacion() {

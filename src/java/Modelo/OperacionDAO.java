@@ -84,4 +84,18 @@ public class OperacionDAO {
         }
         return r;
     }
+    
+    public void eliminarOperacion(int idOperacion) {
+        String sql = "CALL eliminarOperacion(?)";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, idOperacion);
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            
+        }
+    }
 }

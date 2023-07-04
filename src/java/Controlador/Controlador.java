@@ -43,8 +43,7 @@ public class Controlador extends HttpServlet {
         
         HttpSession session;
         String accion = request.getParameter("accion");
-        List compra, mercaderia, operacion;
-        int idTipo;
+        List mercaderia;
                 
         switch(accion) {
             //Inicio de Sesión
@@ -74,52 +73,8 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
                 break;
-            
-            //Ventas de Mecadería----------------------------------------------------------------------
-            case "mostrarVenta":
-                idTipo = 2;
                 
-                mercaderia = mdao.listarMercaderia();
-                compra = ddao.listarDetalle(idTipo);
-                
-                request.setAttribute("lista1", mercaderia);
-                request.setAttribute("lista", compra);
-                request.getRequestDispatcher("consulta/consultaVenta.jsp").forward(request, response);
-                break;
-                
-            case "agregarVenta":
-                String Participante = request.getParameter("Participante");
-                int idMercaderia = Integer.parseInt(request.getParameter("idMercaderia"));
-                double Cantidad = Double.parseDouble(request.getParameter("Cantidad"));
-                double Precio = Double.parseDouble(request.getParameter("Precio"));
-                double Monto = Double.parseDouble(request.getParameter("Monto"));
-                String Fecha = request.getParameter("Fecha");
-                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-                idTipo = Integer.parseInt(request.getParameter("idTipo"));
-                
-                o.setParticipante(Participante);
-                o.setMonto(Monto);
-                o.setFecha(Fecha);
-                o.setIdUsuario(idUsuario);
-                o.setIdTipo(idTipo);
-                odao.agregarOperacion(o);
-                
-                int idOp = Integer.parseInt(odao.idOperacion());
-                
-                de.setCantidad(Cantidad);
-                de.setPrecio(Precio);
-                de.setIdOperacion(idOp);
-                de.setIdMercaderia(idMercaderia);
-                
-                ddao.agregarDetalleOperacion(de);
-                break;
-                
-            case "eliminarVenta":
-                /*int idDetalleVenta = Integer.parseInt(request.getParameter("idDetalleVenta"));
-                dvdao.eliminarDetalleVenta(idDetalleVenta);*/
-                break;
-                
-            //Ganancias
+            //Dashboard
             case "mostrarDashboard":
                 double totalCosto = cdao.totalCosto();
                 c.setTotalCosto(totalCosto);

@@ -16,7 +16,6 @@
             </div><hr>
         </div>
         
-        <!Contenedor-------->
         <div class="container py-5">
             <div class="row">
                 
@@ -113,11 +112,12 @@
                                                 <td>${lista.getFecha()}</td>
 
                                                 <td class="d-grid gap-2">                                 
-                                                    <a id="btnEditar" class="btn btn-outline-warning">
-                                                        <input type="hidden" name="lista" id="lista" value="${lista}">Editar
+                                                    <a href="ventaControlador?accion=editarVenta&idOperacion=${lista.getIdOperacion()}" class="btn btn-outline-warning">
+                                                        Editar
                                                     </a>
-
-                                                    <a id="btnEliminar" class="btn btn-outline-danger">
+                                                        
+                                                    <input type="hidden" id="idOperacion" name="idOperacion" value="${lista.getIdOperacion()}">
+                                                    <a id="eliminarVenta" class="btn btn-outline-danger">
                                                         <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">Eliminar
                                                     </a>
                                                 </td>
@@ -132,6 +132,6 @@
             </div>
         </div>
                                             
-        <script src="<%=request.getContextPath()%>/resource/js/funciones.js"></script>
+        <script src="<%=request.getContextPath()%>/resource/js/venta.js"></script>
     </body>
 </html>
