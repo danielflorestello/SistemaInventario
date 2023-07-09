@@ -1,14 +1,9 @@
-
 package Controlador;
 
 import Modelo.Calculo;
 import Modelo.CalculoDAO;
-import Modelo.DetalleOperacion;
-import Modelo.DetalleOperacionDAO;
 import Modelo.Mercaderia;
 import Modelo.MercaderiaDAO;
-import Modelo.Operacion;
-import Modelo.OperacionDAO;
 import Modelo.UsuarioDAO;
 import Modelo.Usuarios;
 import java.io.IOException;
@@ -27,12 +22,6 @@ public class Controlador extends HttpServlet {
     
     Mercaderia me = new Mercaderia();
     MercaderiaDAO mdao = new MercaderiaDAO();
-    
-    Operacion o = new Operacion();
-    OperacionDAO odao = new OperacionDAO();
-    
-    DetalleOperacion de = new DetalleOperacion();
-    DetalleOperacionDAO ddao = new DetalleOperacionDAO();
     
     Calculo c = new Calculo();
     CalculoDAO cdao = new CalculoDAO();
@@ -107,13 +96,13 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     @Override
     public String getServletInfo() {
         return "Short description";

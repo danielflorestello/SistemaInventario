@@ -1,16 +1,13 @@
 package Controlador;
 
-import Modelo.Calculo;
-import Modelo.CalculoDAO;
 import Modelo.DetalleOperacion;
 import Modelo.DetalleOperacionDAO;
 import Modelo.Mercaderia;
 import Modelo.MercaderiaDAO;
 import Modelo.Operacion;
 import Modelo.OperacionDAO;
-import Modelo.UsuarioDAO;
-import Modelo.Usuarios;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ventaControlador", urlPatterns = {"/ventaControlador"})
 public class ventaControlador extends HttpServlet {
     
-    Usuarios us = new Usuarios();
-    UsuarioDAO udao = new UsuarioDAO();
-    
     Mercaderia me = new Mercaderia();
     MercaderiaDAO mdao = new MercaderiaDAO();
     
@@ -32,9 +26,6 @@ public class ventaControlador extends HttpServlet {
     
     DetalleOperacion de = new DetalleOperacion();
     DetalleOperacionDAO ddao = new DetalleOperacionDAO();
-    
-    Calculo c = new Calculo();
-    CalculoDAO cdao = new CalculoDAO();
     
     int idOperacion;
     
@@ -94,13 +85,13 @@ public class ventaControlador extends HttpServlet {
                 request.getRequestDispatcher("principal.jsp").forward(request, response);
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

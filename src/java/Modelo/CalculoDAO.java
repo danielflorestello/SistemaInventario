@@ -24,6 +24,7 @@ public class CalculoDAO {
             
             while (rs.next()) {
                 totalCosto = rs.getDouble(1);
+                System.out.println(totalCosto);
             }
             
         } catch (SQLException e) {
@@ -60,5 +61,10 @@ public class CalculoDAO {
     
     public double margenBruto() {
         return 0;  
+    }
+    
+    public static void main(String[] args) {
+        CalculoDAO c = new CalculoDAO();
+        c.totalCosto();
     }
 }

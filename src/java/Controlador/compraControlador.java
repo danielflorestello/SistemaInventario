@@ -1,15 +1,11 @@
 package Controlador;
 
-import Modelo.Calculo;
-import Modelo.CalculoDAO;
 import Modelo.DetalleOperacion;
 import Modelo.DetalleOperacionDAO;
 import Modelo.Mercaderia;
 import Modelo.MercaderiaDAO;
 import Modelo.Operacion;
 import Modelo.OperacionDAO;
-import Modelo.UsuarioDAO;
-import Modelo.Usuarios;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "compraControlador", urlPatterns = {"/compraControlador"})
 public class compraControlador extends HttpServlet {
     
-    Usuarios us = new Usuarios();
-    UsuarioDAO udao = new UsuarioDAO();
-    
     Mercaderia me = new Mercaderia();
     MercaderiaDAO mdao = new MercaderiaDAO();
     
@@ -34,13 +27,10 @@ public class compraControlador extends HttpServlet {
     DetalleOperacion de = new DetalleOperacion();
     DetalleOperacionDAO ddao = new DetalleOperacionDAO();
     
-    Calculo c = new Calculo();
-    CalculoDAO cdao = new CalculoDAO();
-    
     List<Operacion> listado = new ArrayList<>();
     
     int item, idOperacion, idMercaderia;
-                
+    
     String cliente;
     
     double total, precio, cantidad, subTotal;
