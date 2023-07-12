@@ -32,7 +32,6 @@ public class Controlador extends HttpServlet {
         
         HttpSession session;
         String accion = request.getParameter("accion");
-        List mercaderia;
                 
         switch(accion) {
             //Inicio de Sesión
@@ -74,9 +73,11 @@ public class Controlador extends HttpServlet {
                 double totalGanancia = cdao.totalGanancia();
                 c.setTotalGanancia(totalGanancia);
                 
-                mercaderia = mdao.listarMercaderia();
+                List margen = cdao.margenBruto();
+                List rotacion = cdao.rotacionInventario();
                 
-                request.setAttribute("listado", mercaderia);
+                request.setAttribute("margen", margen);
+                request.setAttribute("rotacion", rotacion);
                 request.setAttribute("calculo", c);
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
                 break;

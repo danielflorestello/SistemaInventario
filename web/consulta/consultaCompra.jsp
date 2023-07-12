@@ -38,11 +38,11 @@
                         </thead>
                         
                         <tbody>
-                            
+                            <c:forEach var="lista" items="${lista}">
                                 <tr>
-                                    <td></td>
-                                    <td>S/</td>
-                                    <td></td>
+                                    <td>${lista.getParticipante()}</td>
+                                    <td>S/${lista.getMonto()}</td>
+                                    <td>${lista.getFecha()}</td>
                                     
                                     <td>
                                         <input type="hidden" id="idOperacion" name="idOperacion" value="">
@@ -51,7 +51,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                            
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

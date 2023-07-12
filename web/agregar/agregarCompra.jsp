@@ -59,7 +59,7 @@
                                 <label class="col-sm-4 col-form-label">Cantidad: </label>
 
                                 <div class="col-sm-7">
-                                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad..." step="0.01" min="0">
+                                    <input type="number" name="cantidad" id="cantidad" class="form-control" pattern="[a-zA-Z]+" placeholder="Cantidad..." step="0.01" min="0">
                                 </div>
                             </div>
                             

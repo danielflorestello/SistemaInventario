@@ -50,6 +50,36 @@ public class DetalleOperacionDAO {
         return lista;
     }
     
+    public List mostrarDetalle(int id) {
+        String sql = "CALL mostrarDetalle(?)";
+        
+        List<DetalleOperacion> lista = new ArrayList<>();
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                de = new DetalleOperacion();
+                de.setIdDetalle(rs.getInt(1));
+                de.setCantidad(rs.getDouble(2));
+                de.setPrecio(rs.getDouble(3));
+                de.setSubTotal(rs.getDouble(4));
+                de.setIdOperacion(rs.getInt(5));
+                de.setIdMercaderia(rs.getInt(6));
+                de.setNombre(rs.getString(7));
+                lista.add(de);
+            }
+            
+        } catch (SQLException e) {
+            
+        }
+        
+        return lista;
+    }
+    
     public int agregarDetalleOperacion(DetalleOperacion de) {
         String sql = "CALL agregarDetalleOperacion(?, ?, ?, ?, ?)";
         

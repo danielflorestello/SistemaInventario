@@ -63,7 +63,7 @@
                                 <label class="col-sm-4 col-form-label">Cantidad: </label>
 
                                 <div class="col-sm-7">
-                                    <input type="number" class="form-control" id="Cantidad" name="Cantidad" placeholder="Cantidad..." min="0">
+                                    <input type="number" id="Cantidad" name="Cantidad" class="form-control" placeholder="Cantidad..." min="0">
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@
                                 <label class="col-sm-4 col-form-label">Monto: </label>
                                 
                                 <div class="col-sm-4">
-                                    <input type="text" name="Monto" id="Monto" class="form-control" readonly="" value="0.00">
+                                    <input type="number" name="Monto" id="Monto" class="form-control" readonly="" value="0.00">
                                 </div>
                             </div>
                             
@@ -105,20 +105,16 @@
                                         <c:forEach var="lista" items="${lista}">
                                             <tr>
                                                 <td>${lista.getParticipante()}</td>
-                                                <td>${lista.getIdOperacion()} - ${lista.getNombre()}</td>
+                                                <td>${lista.getNombre()}</td>
                                                 <td>S/${lista.getPrecio()}</td>
                                                 <td>${lista.getCantidad()}</td>
                                                 <td>S/${lista.getMonto()}</td>
                                                 <td>${lista.getFecha()}</td>
 
-                                                <td class="d-grid gap-2">                                 
-                                                    <a href="ventaControlador?accion=editarVenta&idOperacion=${lista.getIdOperacion()}" class="btn btn-outline-warning">
-                                                        Editar
-                                                    </a>
-                                                        
+                                                <td class="d-grid gap-2">                                                        
                                                     <input type="hidden" id="idOperacion" name="idOperacion" value="${lista.getIdOperacion()}">
                                                     <a id="eliminarVenta" class="btn btn-outline-danger">
-                                                        <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${lista}">Eliminar
+                                                        <input type="hidden" name="idDetalleVenta" id="idDetalleVenta" value="${listalista.getIdOperacion()}">Eliminar
                                                     </a>
                                                 </td>
                                             </tr>

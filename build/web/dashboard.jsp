@@ -65,21 +65,23 @@
                         
                         <div class="card-body">
                             <div class="chart-area align-items-center">
-                                <diV class="col-sm-3">
+                                <div class="col">
                                     <div class="container">
                                         <table class="table table-hover text-center">
                                             <thead>
                                                 <tr>
                                                     <th>Mercaderia</th>
+                                                    <th>Fecha</th>
                                                     <th>Margen</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <c:forEach var="lista" items="${listado}">
+                                                <c:forEach var="margen" items="${margen}">
                                                     <tr>
-                                                        <td>${lista.getNombre()}</td>
-                                                        <td></td>
+                                                        <td>${margen.getNombre()}</td>
+                                                        <td>${margen.getFecha()}</td>
+                                                        <td>${margen.getMargenBruto()} %</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -101,7 +103,29 @@
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="chart-area align-items-center">
-                                <div id="chartCostos" style="height: 300px; width: 100%;"></div>
+                                <div class="col">
+                                    <div class="container">
+                                        <table class="table table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mercaderia</th>
+                                                    <th>Fecha</th>
+                                                    <th>Rotacion</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <c:forEach var="r" items="${rotacion}">
+                                                    <tr>
+                                                        <td>${r.getNombre()}</td>
+                                                        <td>${r.getFecha()}</td>
+                                                        <td>${r.getRotacion()}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,8 @@ package Controlador;
 
 import Modelo.DetalleOperacion;
 import Modelo.DetalleOperacionDAO;
+import Modelo.Kardex;
+import Modelo.KardexDAO;
 import Modelo.Mercaderia;
 import Modelo.MercaderiaDAO;
 import Modelo.Operacion;
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "compraControlador", urlPatterns = {"/compraControlador"})
 public class compraControlador extends HttpServlet {
+    
+    Kardex k = new Kardex();
+    KardexDAO kdao = new KardexDAO();
     
     Mercaderia me = new Mercaderia();
     MercaderiaDAO mdao = new MercaderiaDAO();
@@ -128,15 +133,23 @@ public class compraControlador extends HttpServlet {
                     de.setIdOperacion(id);
                     de.setIdMercaderia(listado.get(i).getIdMercaderia());
                     ddao.agregarDetalleOperacion(de);
+                    
+                    k = new Kardex();
+                    
+                    k.setIdMercaderia(listado.get(i).getIdMercaderia());
+                    k.setFechaIngreso(fecha);
+                    k.setIngreso(listado.get(i).getCantidad());
+                    k.setSaldo(listado.get(i).getCantidad());
+                    kdao.insertarKardex(k);
                 }
                 
                 response.sendRedirect("compraControlador?accion=mostrarCompra");
                 break;
                 
             case "eliminarCompra":
-                idOperacion = Integer.parseInt(request.getParameter("idOperacion"));
-                odao.eliminarOperacion(idOperacion);
-                ddao.eliminarDetalle(idOperacion);
+                int codOperacion = Integer.parseInt(request.getParameter("idOperacion"));
+                ddao.eliminarDetalle(codOperacion);
+                odao.eliminarOperacion(codOperacion);
                 break;
                 
             default:

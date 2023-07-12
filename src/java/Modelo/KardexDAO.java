@@ -43,5 +43,81 @@ public class KardexDAO {
         return lista;
     }
     
+    public String idKardex(int id) {
+        String sql = "CALL idKardex(?)";
+        
+        String idKardex = "";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                idKardex = rs.getString(1);
+            }
+        } catch (SQLException e) {
+
+        }
+        return idKardex;
+    }
     
+    public String saldoActual(int id) {
+        String sql = "CALL saldoActual(?)";
+        
+        String saldoActual = "";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                saldoActual = rs.getString(1);
+            }
+        } catch (SQLException e) {
+
+        }
+        return saldoActual;
+    }
+    
+    public int insertarKardex(Kardex k) {
+        String sql = "CALL insertarKardex(?, ?, ?, ?)";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, k.getIdMercaderia());
+            ps.setString(2, k.getFechaIngreso());
+            ps.setDouble(3, k.getIngreso());
+            ps.setDouble(4, k.getSaldo());
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            
+        }
+        
+        return r;
+    }
+    
+    public int actualizarKardex(Kardex k) {
+        String sql = "CALL actualizarKardex(?, ?, ?, ?)";
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareCall(sql);
+            ps.setInt(1, k.getIdKardex());
+            ps.setString(2, k.getFechaSalida());
+            ps.setDouble(3, k.getSalida());
+            ps.setDouble(4, k.getSaldo());
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            
+        }
+        
+        return r;
+    }
 }

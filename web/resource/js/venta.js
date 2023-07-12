@@ -10,7 +10,21 @@ $(document).ready(function () {
     
     Cantidad.addEventListener('input', calcularMonto);
     Precio.addEventListener('input', calcularMonto);
-
+    
+    /*function validarEntrada() {
+        var pattern = /[0-9]$/;
+        
+        cantidad = Cantidad.value;
+        
+        if (pattern.test(cantidad)) {
+            calcularMonto();
+            
+        } else {
+            alert("La entrada es inválida");
+            Cantidad.value = '';
+        }
+    }*/
+    
     function calcularMonto() {
         var cantidad = parseFloat(Cantidad.value);
         var precio = parseFloat(Precio.value);
@@ -18,6 +32,7 @@ $(document).ready(function () {
         if (!isNaN(cantidad) && !isNaN(precio)) {
             var monto = cantidad * precio;
             Monto.value = monto.toFixed(2);
+            
         } else {
             Monto.value = '0.00';
         }
@@ -25,7 +40,6 @@ $(document).ready(function () {
     
     //Agregar
     $("#agregarVenta").click(function () {
-        var idTipo = 2;
         var Comprador = document.getElementById('Comprador').value;
         var idUsuario = document.getElementById('Usuario').value;
         var idMercaderia = document.getElementById('Mercaderia').value;
@@ -51,7 +65,7 @@ $(document).ready(function () {
             
             $.ajax({
                 type: 'POST',
-                url: 'Controlador?accion=agregarVenta',
+                url: 'ventaControlador?accion=agregarVenta',
                 data: {
                     'Participante': Comprador,
                     'idMercaderia': idMercaderia,
@@ -60,7 +74,6 @@ $(document).ready(function () {
                     'Monto': Monto,
                     'Fecha': Fecha,
                     'idUsuario': idUsuario,
-                    'idTipo': idTipo
                 },
                 success: function () {
                     Swal.fire(
@@ -68,7 +81,7 @@ $(document).ready(function () {
                             '¡Se guardaron los datos correctamente!'
                             ).then((result) => {
                         if (result.isConfirmed) {
-                            parent.location.href = "Controlador?accion=mostrarVenta";
+                            parent.location.href = "ventaControlador?accion=mostrarVenta";
                         }
                     });
                 }

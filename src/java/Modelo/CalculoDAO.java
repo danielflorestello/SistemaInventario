@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalculoDAO {
     Conexion cn = new Conexion();
@@ -59,12 +61,51 @@ public class CalculoDAO {
         return totalGanancia;
     }
     
-    public double margenBruto() {
-        return 0;  
+    public List margenBruto() {
+        String sql = "CALL margenBruto()";
+        
+        List<Calculo> lista = new ArrayList<>();
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {     
+                Calculo c = new Calculo();
+                c.setNombre(rs.getString("Nombre"));
+                c.setFecha(rs.getString("Mes"));
+                c.setMargenBruto(rs.getDouble("margenBruto"));
+                lista.add(c);
+            }
+            
+        } catch (SQLException e) {
+            
+        }
+        return lista;
     }
     
-    public static void main(String[] args) {
-        CalculoDAO c = new CalculoDAO();
-        c.totalCosto();
+    public List rotacionInventario() {
+        String sql = "CALL rotacionInventario()";
+        
+        List<Calculo> lista = new ArrayList<>();
+        
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {     
+                Calculo c = new Calculo();
+                c.setNombre(rs.getString("Nombre"));
+                c.setFecha(rs.getString("Mes"));
+                c.setRotacion(rs.getDouble("rotacion"));
+                lista.add(c);
+            }
+            
+        } catch (SQLException e) {
+            
+        }
+        return lista;
     }
 }
